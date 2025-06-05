@@ -73,7 +73,7 @@ exports.book_create_get = asyncHandler(async (req, res, next) => {
   ]);
 
   res.render("book_form", {
-    title: "本の作成",
+    title: "本の追加",
     authors: allAuthors,
     genres: allGenres,
   });
@@ -136,7 +136,7 @@ exports.book_create_post = [
         }
       }
       res.render("book_form", {
-        title: "本の作成",
+        title: "本の追加",
         authors: allAuthors,
         genres: allGenres,
         book: book,

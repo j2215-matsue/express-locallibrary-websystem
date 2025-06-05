@@ -38,7 +38,7 @@ exports.bookinstance_create_get = asyncHandler(async (req, res, next) => {
   const allBooks = await Book.find({}, "title").sort({ title: 1 }).exec();
 
   res.render("bookinstance_form", {
-    title: "Create BookInstance",
+    title: "本例の追加",
     book_list: allBooks,
   });
 });
@@ -46,7 +46,7 @@ exports.bookinstance_create_get = asyncHandler(async (req, res, next) => {
 // Handle BookInstance create on POST.
 exports.bookinstance_create_post = [
   // Validate and sanitize fields.
-  body("book", "Book must be specified").trim().isLength({ min: 1 }).escape(),
+  body("本", "Book must be specified").trim().isLength({ min: 1 }).escape(),
   body("imprint", "Imprint must be specified")
     .trim()
     .isLength({ min: 1 })
@@ -76,7 +76,7 @@ exports.bookinstance_create_post = [
       const allBooks = await Book.find({}, "title").sort({ title: 1 }).exec();
 
       res.render("bookinstance_form", {
-        title: "Create BookInstance",
+        title: "本例を追加",
         book_list: allBooks,
         selected_book: bookInstance.book._id,
         errors: errors.array(),
@@ -103,7 +103,7 @@ exports.bookinstance_delete_get = asyncHandler(async (req, res, next) => {
   }
 
   res.render("bookinstance_delete", {
-    title: "Delete BookInstance",
+    title: "本例を削除",
     bookinstance: bookInstance,
   });
 });
@@ -125,13 +125,13 @@ exports.bookinstance_update_get = asyncHandler(async (req, res, next) => {
 
   if (bookInstance === null) {
     // No results.
-    const err = new Error("Book copy not found");
+    const err = new Error("本のコピーが見つかりません");
     err.status = 404;
     return next(err);
   }
 
   res.render("bookinstance_form", {
-    title: "Update BookInstance",
+    title: "本例の更新",
     book_list: allBooks,
     selected_book: bookInstance.book._id,
     bookinstance: bookInstance,
@@ -141,8 +141,8 @@ exports.bookinstance_update_get = asyncHandler(async (req, res, next) => {
 // Handle BookInstance update on POST.
 exports.bookinstance_update_post = [
   // Validate and sanitize fields.
-  body("book", "Book must be specified").trim().isLength({ min: 1 }).escape(),
-  body("imprint", "Imprint must be specified")
+  body("本", "書籍を明記してください").trim().isLength({ min: 1 }).escape(),
+  body("詳細", "Imprint must be specified")
     .trim()
     .isLength({ min: 1 })
     .escape(),
@@ -173,7 +173,7 @@ exports.bookinstance_update_post = [
       const allBooks = await Book.find({}, "title").exec();
 
       res.render("bookinstance_form", {
-        title: "Update BookInstance",
+        title: "本例の更新",
         book_list: allBooks,
         selected_book: bookInstance.book._id,
         errors: errors.array(),
